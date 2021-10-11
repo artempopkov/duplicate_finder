@@ -14,7 +14,7 @@ class Application
   def start
     abort 'There are no file available in data folder' if files.empty?
 
-    Printer.print_hash_values(duplicates_files,message: are_there_duplicates?(duplicates_files))
+    Printer.print_hash_values(duplicates_files, message: are_there_duplicates?(duplicates_files))
   end
 
   private
