@@ -14,14 +14,14 @@ class Application
   def start
     abort 'There are no file available in data folder' if files.empty?
 
-    Printer.print_hash_values(duplicates_files,message: are_there_duplicates?(duplicates_files))
+    Printer.print_hash_values(duplicates_files, message: are_there_duplicates(duplicates_files))
   end
 
   private
 
   attr_reader :root_path, :data_path
 
-  def are_there_duplicates?(hash)
+  def are_there_duplicates(hash)
     if hash.empty?
       'There aren\'t duplicate files'
     else
