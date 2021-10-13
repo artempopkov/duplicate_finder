@@ -4,7 +4,7 @@ class FolderFileHasher
   end
 
   def files_group_by_hash(files)
-    arr = files.each_with_object(Hash.new([])) do |value, hash| 
+    files.each_with_object(Hash.new([])) do |value, hash| 
       hash[file_hash(value)]+= [File.basename(value)] 
     end
   end
