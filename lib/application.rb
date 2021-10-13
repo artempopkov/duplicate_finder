@@ -1,5 +1,6 @@
 require 'digest'
 require 'folder_duplicate_files_report'
+require 'folder_files_hasher'
 
 class Application
   def initialize(root_path)
@@ -15,26 +16,16 @@ class Application
     abort 'There are no file available in data folder' if files.empty?
 
     reporter = FolderDuplicateFilesReport.new
-    
-    reporter.print_report(duplicates_files(files_group_by_hash))
+    hasher = FolderFileHasher.new
+    reporter.print_report(duplicates_files(hasher.files_group_by_hash(files)))
   end
 
   private
 
   attr_reader :root_path, :data_path
 
-  def files_group_by_hash
-    arr = files.each_with_object(Hash.new([])) do |value, hash| 
-      hash[file_hash(value)]+= [File.basename(value)] 
-    end
-  end
-
   def duplicates_files(hash)
     hash.select{|key, value| value.count > 1}
-  end
-
-  def file_hash(file_path)
-    Digest::SHA256.file(file_path).to_s
   end
 
   def files
