@@ -1,5 +1,5 @@
 require 'digest'
-require 'printer'
+require 'folder_duplicate_files_report'
 
 class Application
   def initialize(root_path)
@@ -14,25 +14,23 @@ class Application
   def start
     abort 'There are no file available in data folder' if files.empty?
 
-    Printer.print_hash_values(duplicates_files, message: are_there_duplicates(duplicates_files))
+    reporter = FolderDuplicateFilesReport.new
+    
+    reporter.print_report(duplicates_files(files_group_by_hash))
   end
 
   private
 
   attr_reader :root_path, :data_path
 
-  def are_there_duplicates(hash)
-    if hash.empty?
-      'There aren\'t duplicate files'
-    else
-      'There are duplicate files'
+  def files_group_by_hash
+    arr = files.each_with_object(Hash.new([])) do |value, hash| 
+      hash[file_hash(value)]+= [File.basename(value)] 
     end
   end
 
-  def files_hash_array
-    files.each_with_object(Array.new) do |value, array|
-      array << [file_hash(value), File.basename(value)]
-    end
+  def duplicates_files(hash)
+    hash.select{|key, value| value.count > 1}
   end
 
   def file_hash(file_path)
@@ -41,9 +39,5 @@ class Application
 
   def files
     @files ||= Dir.glob("#{data_path}**/**") 
-  end
-
-  def duplicates_files
-    @duplicates_files ||= files_hash_array.group_by { |value| value.shift}.transform_values{ |value| value.flatten }.select{|key, value| value.count > 1}
   end
 end

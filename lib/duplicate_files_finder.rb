@@ -1,0 +1,3 @@
+class DuplicateFileFinder
+  
+end
