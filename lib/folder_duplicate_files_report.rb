@@ -1,10 +1,15 @@
 class FolderDuplicateFilesReport
-  def print_report(hash)
-    puts hash.empty? ? "There are no duplicates" : "There are duplicates"
-
-    hash.each_with_index do |value, index|
-      puts index + 1
-      puts "\t#{value[1].join(', ')}"
-    end
+  def initialize(registry)
+    @registry = registry
   end
+
+  def print
+    puts registry.empty? ? "There are no duplicates" : "There are duplicates"
+
+    registry.each_duplicates_group { |duplicates| puts duplicates } 
+  end
+
+  private
+
+  attr_reader :registry
 end
