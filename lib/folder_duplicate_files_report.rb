@@ -9,7 +9,7 @@ class FolderDuplicateFilesReport
     else
       puts 'There are duplicates'.colorize(:green)
       registry.each do |duplicates| 
-        puts "- #{duplicates.join(', ')}".colorize(:blue)
+        puts "- #{duplicates.join(', ')}".colorize(:cyan)
       end 
     end
   end
