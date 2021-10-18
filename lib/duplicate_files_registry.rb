@@ -1,31 +1,28 @@
 class DuplicateFilesRegistry
-  def initialize(digester, files)
-    @files_digestes = Hash.new([])
+  def initialize(digester, data_path)
     @digester = digester
-    add_files(files)
+    @files = Dir.glob("#{data_path}**/**")
+    @duplicate_files = Hash.new([])
+    add_files(@files)
   end
 
-  def each_duplicates_group
-    duplicates_files.each_with_index do |duplicates, index|
-      yield "#{index + 1}: #{duplicates[1].join(', ')}"
-    end
+  def each
+    duplicate_files.each_value { |duplicates| yield duplicates }
   end
   
   def empty?
-    duplicates_files.empty?
+    files.empty?
+  end
+
+  def add_files(files)
+    files.each { |file_path| add_file(file_path) }
+  end
+
+  def add_file(file_path)
+    duplicate_files[digester.digest(file_path)]+= [File.basename(file_path)]
   end
   
   private
   
-  attr_reader :files_digestes, :digester
-  
-  def add_files(files)
-    files.each do |file_path|
-      files_digestes[digester.digest(file_path)]+= [File.basename(file_path)]
-    end
-  end
-
-  def duplicates_files
-    files_digestes.select{|digest, files| files.count > 1}
-  end
+  attr_reader :digester, :files, :duplicate_files
 end
