@@ -47,7 +47,7 @@ describe DuplicateFilesRegistry do
   context 'counts methods' do
     it 'should give information about files amount in the registry' do
       count = @registry.count_files
-      expect(count).to eq 1
+      expect(count).to eq 2
     end
 
     it 'should give information about duplicates amount in the registry' do
