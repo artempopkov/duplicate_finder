@@ -5,11 +5,6 @@ require 'rspec'
 require 'tempfile'
 
 describe DuplicateFilesRegistry do
-  before(:each) do
-    # @data_path = File.expand_path('data', __dir__)
-    # @registry = DuplicateFilesRegistry.new(Sha256FileDigester.new, File::NULL)
-  end
-
   let(:registry) { DuplicateFilesRegistry.new(Sha256FileDigester.new, File::NULL) }
   
   context "when adding new files to registry" do

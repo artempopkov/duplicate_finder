@@ -16,17 +16,17 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 RSpec.configure do |config|
-  original_stderr = $stderr
-  original_stdout = $stdout
-  config.before(:all) do
-    # Redirect stderr and stdout
-    $stderr = File.open(File::NULL, "w")
-    $stdout = File.open(File::NULL, "w")
-  end
-  config.after(:all) do
-    $stderr = original_stderr
-    $stdout = original_stdout
-  end
+  # original_stderr = $stderr
+  # original_stdout = $stdout
+  # config.before(:all) do
+  #   # Redirect stderr and stdout
+  #   $stderr = File.open(File::NULL, "w")
+  #   $stdout = File.open(File::NULL, "w")
+  # end
+  # config.after(:all) do
+  #   $stderr = original_stderr
+  #   $stdout = original_stdout
+  # end
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
