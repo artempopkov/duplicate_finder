@@ -3,7 +3,6 @@ require_relative '../lib/duplicate_files_registry'
 require_relative '../lib/folder_duplicate_files_report'
 
 require 'rspec'
-require 'o_stream_catcher'
 require 'colorize'
 
 describe FolderDuplicateFilesReport do
@@ -16,9 +15,6 @@ describe FolderDuplicateFilesReport do
 
   it 'should print report to console' do
     expected = "\e[0;32;49mThere are duplicates\e[0m\n\e[0;36;49m- 13.png, 14.png\e[0m\n"
-    result, stdout, stderr = OStreamCatcher.catch do
-      report.print
-    end
-    expect(stdout).to eq expected
+    expect { report.print }.to output(expected).to_stdout
   end
 end
