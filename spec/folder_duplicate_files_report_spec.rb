@@ -7,14 +7,21 @@ require 'colorize'
 
 describe FolderDuplicateFilesReport do
   before(:all) do
-    @data_path = File.expand_path('data', __dir__)
-    @registry = DuplicateFilesRegistry.new(Sha256FileDigester.new, @data_path)
+    @registry = DuplicateFilesRegistry.new(Sha256FileDigester.new, File::NULL)
   end
 
   let(:report) { FolderDuplicateFilesReport.new(@registry) }
 
-  it 'should print report to console' do
-    expected = "\e[0;32;49mThere are duplicates\e[0m\n\e[0;36;49m- 13.png, 14.png\e[0m\n"
+  it 'prints report with one duplication pair' do
+    allow(@registry).to receive(:duplicate_files).and_return({a: ['1.png', '2.png']})
+    expected = "\e[0;32;49mThere are duplicates\e[0m\n\e[0;36;49m- 1.png, 2.png\e[0m\n"
     expect { report.print }.to output(expected).to_stdout
   end
+
+  it 'prints report with one duplication pair' do
+    allow(@registry).to receive(:duplicate_files).and_return({a: ['1.png', '2.png'], b: ['3.png']})
+    expected = "\e[0;32;49mThere are duplicates\e[0m\n\e[0;36;49m- 1.png, 2.png\e[0m\n\e[0;36;49m- 3.png\e[0m\n"
+    expect { report.print }.to output(expected).to_stdout
+  end
+
 end
