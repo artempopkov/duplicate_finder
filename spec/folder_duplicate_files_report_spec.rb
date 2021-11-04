@@ -2,7 +2,6 @@ require_relative '../lib/sha256_file_digester'
 require_relative '../lib/duplicate_files_registry'
 require_relative '../lib/folder_duplicate_files_report'
 
-require 'rspec'
 require 'colorize'
 
 describe FolderDuplicateFilesReport do

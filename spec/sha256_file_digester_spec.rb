@@ -1,4 +1,5 @@
 require_relative '../lib/sha256_file_digester'
+
 require 'tempfile'
 
 describe Sha256FileDigester do
