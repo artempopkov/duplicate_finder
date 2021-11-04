@@ -12,7 +12,7 @@ describe Sha256FileDigester do
 
   context 'without file given' do
     it 'exits with error' do
-      expect{ subject.digest('dfre') }.to raise_error(StandardError)
+      expect { subject.digest('dfre') }.to raise_error(StandardError)
     end
   end
 end
