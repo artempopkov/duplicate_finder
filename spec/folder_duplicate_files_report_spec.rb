@@ -6,11 +6,8 @@ require 'rspec'
 require 'colorize'
 
 describe FolderDuplicateFilesReport do
-  before(:all) do
-    @registry = DuplicateFilesRegistry.new(Sha256FileDigester.new, File::NULL)
-  end
-
-  let(:report) { FolderDuplicateFilesReport.new(@registry) }
+  let(:registry) { DuplicateFilesRegistry.new(Sha256FileDigester.new, File::NULL) }
+  let(:report) { FolderDuplicateFilesReport.new(registry) }
 
   context 'with one duplicate pair' do
     let(:expected_output) do
@@ -21,7 +18,7 @@ describe FolderDuplicateFilesReport do
       ].join("\n")
     end
 
-    before { allow(@registry).to receive(:duplicate_files).and_return({a: %w[1.png 2.png]}) }
+    before { allow(registry).to receive(:duplicate_files).and_return({ a: %w[1.png 2.png] }) }
 
     it 'prints report' do
       expect { report.print }.to output(expected_output).to_stdout
@@ -38,7 +35,7 @@ describe FolderDuplicateFilesReport do
       ].join("\n")
     end
 
-    before { allow(@registry).to receive(:duplicate_files).and_return({ a: %w[1.png 2.png], b: ['3.png']}) }
+    before { allow(registry).to receive(:duplicate_files).and_return({ a: %w[1.png 2.png], b: ['3.png']}) }
 
     it 'prints report' do
       expect { report.print }.to output(expected_output).to_stdout
