@@ -4,9 +4,11 @@ require 'tempfile'
 
 describe Sha256FileDigester do
   context 'with file given' do
-    let(:digest) { "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855" }
+    let(:digest) { 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' }
+    let(:file) { Tempfile.create.path }
+
     it 'gets file digest' do
-      expect(subject.digest(Tempfile.create.path)).to eq digest
+      expect(subject.digest(file)).to eq digest
     end
   end
 

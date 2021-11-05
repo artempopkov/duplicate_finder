@@ -8,15 +8,19 @@ describe DuplicateFilesRegistry do
 
   context 'when adding new files to registry' do
     context 'adds file' do
+      let(:file) { Tempfile.new.path }
+
       it do
-        registry.add_file(Tempfile.new.path)
+        registry.add_file(file)
         expect(registry.count_files).to eq 1
       end
     end
 
     context 'adds two files' do
+      let(:files) { [Tempfile.new.path, Tempfile.new.path] }
+
       it do
-        registry.add_files([Tempfile.new.path, Tempfile.new.path])
+        registry.add_files(files)
         expect(registry.count_files).to eq 2
       end
     end

@@ -34,7 +34,7 @@ describe FolderDuplicateFilesReport do
       ].join("\n")
     end
 
-    before { allow(registry).to receive(:duplicate_files).and_return({ a: %w[1.png 2.png], b: ['3.png']}) }
+    before { allow(registry).to receive(:duplicate_files).and_return({ a: %w[1.png 2.png], b: ['3.png'] }) }
 
     it 'prints report' do
       expect { report.print }.to output(expected_output).to_stdout
