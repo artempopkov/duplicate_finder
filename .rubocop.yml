@@ -1,2 +1,4 @@
 Style/Encoding:
   Enabled: false
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
