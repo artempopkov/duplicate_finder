@@ -1,18 +1,32 @@
-GIT
-  remote: https://github.com/fazibear/colorize.git
-  revision: 526654c6d7dfc5483b70184d06b994eba8359514
-  specs:
-    colorize (0.8.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
+    colorize (0.8.1)
+    diff-lcs (1.4.4)
+    o_stream_catcher (0.0.1)
+    rake (10.5.0)
+    rspec (3.0.0)
+      rspec-core (~> 3.0.0)
+      rspec-expectations (~> 3.0.0)
+      rspec-mocks (~> 3.0.0)
+    rspec-core (3.0.4)
+      rspec-support (~> 3.0.0)
+    rspec-expectations (3.0.4)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.0.0)
+    rspec-mocks (3.0.4)
+      rspec-support (~> 3.0.0)
+    rspec-support (3.0.4)
 
 PLATFORMS
+  x64-mingw32
   x86_64-darwin-20
 
 DEPENDENCIES
-  colorize (~> 0.8.1)!
+  colorize (~> 0.8.1)
+  o_stream_catcher (~> 0.0.1)
+  rake (< 11.0)
+  rspec (~> 3.0.0)
 
 BUNDLED WITH
-   2.2.3
+   2.2.22

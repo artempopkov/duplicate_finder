@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'colorize'
 require 'folder_duplicate_files_report'
 require 'sha256_file_digester'
@@ -17,7 +19,7 @@ class Application
 
   def start
     abort 'There are no file available in data folder'.colorize(:red) if registry.empty?
-    
+
     report = FolderDuplicateFilesReport.new(registry)
     report.print
   end
